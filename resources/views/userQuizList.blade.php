@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz List page</title>
+        @vite('resources/css/app.css')
+</head>
+<body >
+    <x-user-navbar ></x-user-navbar>
+
+    <div class=" bg-gray-100 flex flex-col items-center min-h-screen pt-5">  
+
+    <h2 class=" text-2xl text-center text-gray-800 mb-6">Category Name : {{ $category }}    
+    </h2>  
+  <div class=" w-200">
+
+    <ul class=" border border-gray-200">
+        <li class=" p-2 font-bold">
+                
+                <ul class=" flex justify-between">
+                    <li class=" w-30">quiz id</li>
+                    <li class=" w-140">quiz name</li>
+                      <li class=" w-30">action</li>
+                </ul>
+
+            </li>    
+        @foreach ($quizData as $item)
+            <li class="even:bg-gray-200 p-2">
+                
+                <ul class=" flex justify-between">
+                    <li class=" w-30">{{$item->id}}</li>
+                    <li class=" w-140">{{$item->name}}</li>
+                      <li class=" w-30 flex">
+                        <a href="" class=" text-green-500 font-bold">
+                        Attemt Quiz    
+                        </a>  
+                    </li>
+                </ul>
+
+            </li>         
+        @endforeach
+        
+    </ul>
+  </div>
+   </div>
+</body>
+</html>

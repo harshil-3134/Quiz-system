@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Categories page</title>
+    <title>Show Quiz page</title>
         @vite('resources/css/app.css')
 </head>
 <body >
@@ -10,8 +10,8 @@
 
     <div class=" bg-gray-100 flex flex-col items-center min-h-screen pt-5">  
 
-    <h2 class=" text-2xl text-center text-gray-800 mb-6">All current quiz's mcqs
-    <a class=" text-yellow-500 text-sm" href="/add-quiz">Back</a>    
+    <h2 class=" text-2xl text-center text-gray-800 mb-6">Quiz name : {{ $quizName }}
+    <a class=" text-yellow-500 text-sm" href="{{ url()->previous() }}">Back</a>    
     </h2>  
   <div class=" w-200">
 

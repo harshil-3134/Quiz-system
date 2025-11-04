@@ -155,17 +155,30 @@ class AdminController extends Controller
         Session::forget('quizDetails');
         return redirect("/admin-categories");
     }
-    function showquiz($id){
+    function showquiz($id,$quizName){
         
         $admin=Session::get('admin');
         $mcqs= Mcq::where('quiz_id',$id)->get();
         if($admin){
-            return view('show-quiz',["name"=>$admin->name,"mcqs"=>$mcqs]);
+            return view('show-quiz',["name"=>$admin->name,"mcqs"=>$mcqs,"quizName"=>$quizName]);
         }
         else{
             return redirect('admin-login');
         }
     }
+
+    function quizList($id,$category){
+        $admin=Session::get('admin');
+        
+        if($admin){
+            $quizData=Quiz::where('category_id',$id)->get();
+            return view('quizList',["name"=>$admin->name,"quizData"=>$quizData,"category"=>$category]);
+        }
+        else{
+            return redirect('admin-login');
+        }
+    }
+
 }
 
 
