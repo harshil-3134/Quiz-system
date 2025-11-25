@@ -7,8 +7,20 @@ use App\Http\Controllers\UserController;
 
 Route::get('/',[UserController::class,'welcome']);
 Route::get('user-quiz-list/{id}/{category}',[UserController::class,'userQuizList']);
+Route::get('start-quiz/{id}/{name}',[UserController::class,'startQuiz']);
+
 Route::view('user-signup','user-signup');
+Route::view('user-login','user-login');
+Route::post('user-login',[UserController::class,'userLogin']);
+Route::get('user-login-quiz',[UserController::class,'userLoginQuiz']);
+
 Route::post('user-signup',[UserController::class,'userSignup']);
+Route::get('user-signup-quiz',[UserController::class,'userSignupQuiz']);
+Route::get('user-logout',[UserController::class,'userLogout']);
+Route::get('mcq/{id}/{name}',[UserController::class,'mcq']);
+Route::get('submit-next/{id}',[UserController::class,'submitAndNext']);
+
+
 
 Route::view('Admin-login','admin-login');
 

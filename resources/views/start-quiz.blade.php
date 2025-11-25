@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz List page</title>
+        @vite('resources/css/app.css')
+</head>
+<body >
+    <x-user-navbar ></x-user-navbar>
+    @if (session('message'))
+    <p class="text-green-500">{{'message'}}</p> 
+    @endif
+
+    <div class=" bg-gray-100 flex flex-col items-center min-h-screen pt-5">  
+
+    <h1 class=" text-4xl text-center text-gray-800 font-bold mb-6">{{ $quizName }}   
+    </h1> 
+    <h3 class="text-lg text-center text-gray-800  mb-6"
+    >This is quiz contains {{$quizCount}} Questions and no limit to attempt</h3> 
+ 
+ <h1 class=" text-2xl text-center text-gray-800 font-bold mb-6">Good Luck  
+    </h1> 
+    @if(Session('user'))
+     <a type="submit" href="/mcq/{{ session('firstmcq')->id.'/'.$quizName }}" class=" bg-blue-500 rounded-md px-4 py-2 my-5 text-white ">
+        Start Quiz
+     </a>
+    @else
+     <a type="submit" href="/user-signup-quiz" class=" bg-blue-500 rounded-md px-4 py-2 my-5 text-white ">
+       Signup for Start Quiz
+     </a>
+     <a type="submit" href="/user-login-quiz" class=" bg-blue-500 rounded-md px-4 py-2 my-5 text-white ">
+        Login for Start Quiz
+     </a>
+    @endif
+</div>
+    
+</body>
+</html>
