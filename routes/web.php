@@ -17,6 +17,8 @@ Route::get('user-login-quiz',[UserController::class,'userLoginQuiz']);
 Route::post('user-signup',[UserController::class,'userSignup']);
 Route::get('user-signup-quiz',[UserController::class,'userSignupQuiz']);
 Route::get('user-logout',[UserController::class,'userLogout']);
+Route::get('search-quiz',[UserController::class,'searchQuiz']);
+
 
 Route::middleware('CheckUserAuth')->group(function(){
 
