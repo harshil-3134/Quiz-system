@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Categories page</title>
+    <title>Home page</title>
         @vite('resources/css/app.css')
 </head>
 <body >
