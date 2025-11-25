@@ -23,8 +23,10 @@ class UserController extends Controller
 {
     function welcome(){
         // $categories=category::get();
-         $categories=category::withCount('quizzes')->get();
-        return view('welcome',['categories'=>$categories]);
+         $categories=category::withCount('quizzes')->orderBy('quizzes_count','desc')->take(5)->get();
+           $quizData=Quiz::withCount('records')->orderBy('records_count','desc')->take(5)->get();
+
+        return view('welcome',['categories'=>$categories,'quizData'=>$quizData]);
     }
 
     function userQuizList($id,$category){
@@ -58,9 +60,11 @@ class UserController extends Controller
         if(Session::has('quiz-url')){
             $url=Session::get('quiz-url');
               Session::forget('quiz-url');
-               return redirect($url)->with('message',"user Login succesfully");
-        }
-         return redirect('/')->with('message',"user registered succesfully");
+               return redirect($url)->with('message-success',"User Login succesfully,please check email to verify account");
+        }else{
+         return redirect('/')->with('message-success',"User registered succesfully,please check email to verify account");
+
+         }
        }
        
     }
@@ -91,7 +95,7 @@ class UserController extends Controller
        
        $user = User::where('email',$request->email)->first();
        if(!$user||!Hash::check($request->password,$user->password)){
-          return "User not valid, Please check the email and password";
+          return redirect('user-login')->with('message-error',"User not valid, Please check the email and password");
        }
 
      
@@ -211,7 +215,8 @@ class UserController extends Controller
            $user->active=2;
        }
        if($user->save()){
-        return redirect('/');
+         return redirect('/')->with('message-success',"User Verfied succesfully");
+
        }
 
     }
@@ -222,7 +227,7 @@ class UserController extends Controller
        Mail::to($request->email)->send(new userForgotPassword($link));
 
        //
-      return redirect('/');
+         return redirect('/')->with('message-success',"Email has been sent to your address");
 
     }
 
@@ -240,7 +245,7 @@ class UserController extends Controller
          if($user){
           $user->password=Hash::make($request->password);
           if($user->save()){
-            return redirect('user-login');
+            return redirect('user-login')->with('message-success',"Password has been updated succesfully");;
           }
          }
     }
