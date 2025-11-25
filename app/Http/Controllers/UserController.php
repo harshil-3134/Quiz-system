@@ -169,9 +169,18 @@ class UserController extends Controller
 
           
           ])->count();
-             
+          $record= Record::find($currentQuiz['recordId']);
+          if($record){
+            $record->status=2;
+            $record->update();
+          }   
 
         return view('quiz-result',['resultData'=>$resultData],['correctAnswers'=>$correctAnswers]);
       }
+    }
+
+    function userDetails(){
+    $quizRecord=Record ::WithQuiz()->where('user_id',Session::get('user')->id)->get();
+      return view('user-details',['quizRecord'=>$quizRecord]);
     }
 }

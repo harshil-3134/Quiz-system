@@ -19,6 +19,11 @@ Route::get('user-signup-quiz',[UserController::class,'userSignupQuiz']);
 Route::get('user-logout',[UserController::class,'userLogout']);
 Route::get('mcq/{id}/{name}',[UserController::class,'mcq']);
 Route::get('submit-next/{id}',[UserController::class,'submitAndNext']);
+Route::get('user-details',[UserController::class,'userDetails']);
+
+
+
+
 
 
 
