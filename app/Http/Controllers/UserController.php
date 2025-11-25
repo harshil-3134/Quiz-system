@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
+
+
+
 use App\Models\category;
 use App\Models\Quiz;
 use App\Models\Mcq;
@@ -10,6 +15,9 @@ use App\Models\User;
 use App\Models\mcq_record;
 use App\Models\Record;
 use Illuminate\Http\Request;
+use App\Mail\verifyUser;
+use App\Mail\userForgotPassword;
+
 
 class UserController extends Controller
 {
@@ -37,6 +45,13 @@ class UserController extends Controller
         "email" =>$request->email,
         "password" =>Hash::make($request->password),
        ]);
+
+       //
+        $link=Crypt::encryptString($user->email);
+        $link= url('/verify-user/'.$link);
+       Mail::to($user->email)->send(new verifyUser($link));
+
+       //
 
        if($user){
         Session::put('user',$user);
@@ -89,7 +104,7 @@ class UserController extends Controller
         }
          return redirect('/');
        }
-       
+        
     }
     
     function userLoginQuiz(){
@@ -187,6 +202,47 @@ class UserController extends Controller
     function searchQuiz(Request $request){
      $quizData= Quiz::withCount('Mcq')->where('name','Like','%'.$request->search.'%')->get();
       return view('search-quiz',['quizData'=>$quizData,'quiz'=>$request->search]);
+    }
+
+    function verifyUser($email){
+       echo $orgEmail= Crypt::decryptString($email);
+       $user = User::where('email',$orgEmail)->first();
+       if($user){
+           $user->active=2;
+       }
+       if($user->save()){
+        return redirect('/');
+       }
+
+    }
+    function userForgotPassword(Request $request){
+             //
+        $link=Crypt::encryptString($request->email);
+        $link= url('/user-forgot-password/'.$link);
+       Mail::to($request->email)->send(new userForgotPassword($link));
+
+       //
+      return redirect('/');
+
+    }
+
+    function userResetForgotPassword($email){
+          $orgEmail= Crypt::decryptString($email);
+          return view('user-set-forgot-password',['email'=>$orgEmail]);
+    }
+
+    function userSetForgotPassword(Request $request){
+        $valdiate= $request->validate([
+        "email" => "required|email",
+        "password" => "required|min:3|confirmed",
+       ]);
+         $user = User::where('email',$request->email)->first();
+         if($user){
+          $user->password=Hash::make($request->password);
+          if($user->save()){
+            return redirect('user-login');
+          }
+         }
     }
 }
 
