@@ -34,6 +34,10 @@ Route::get('user-logout',[UserController::class,'userLogout']);
 Route::get('search-quiz',[UserController::class,'searchQuiz']);
 
 Route::get('categories-list',[UserController::class,'categories']);
+Route::get('certificate',[UserController::class,'certificate']);
+Route::get('download-certifiate',[UserController::class,'dowloadCertifiate']);
+
+
 
 Route::get('verify-user/{email}',[UserController::class,'verifyUser']);
 Route::view('user-forgot-password','user-forgot-password');

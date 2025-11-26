@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
+use Spatie\Browsershot\Browsershot;
 
 
 
@@ -17,7 +18,7 @@ use App\Models\Record;
 use Illuminate\Http\Request;
 use App\Mail\verifyUser;
 use App\Mail\userForgotPassword;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -254,6 +255,30 @@ class UserController extends Controller
             return redirect('user-login')->with('message-success',"Password has been updated succesfully");;
           }
          }
+    }
+    function certificate(){
+      $data=[];
+      $data['quiz']=str_replace('-',' ',Session::get('currentQuiz')['quizName']);
+      $data['name']=Session::get('user')['name'];
+
+      return view('certificate',['data'=>$data]);
+    }
+
+    function dowloadCertifiate(){
+      $data=[];
+      $data['quiz']=str_replace('-',' ',Session::get('currentQuiz')['quizName']);
+      $data['name']=Session::get('user')['name'];
+
+      $html= view('download-certificate',$data)->render();
+      return response(
+   
+        Browsershot::html($html)->pdf()
+      )->withHeaders(
+        [
+          'Content-type'=>"application/pdf",
+          'Content-dispostion'=>"attachment;filename=certificate.pdf"
+        ]
+        );
     }
 }
 
