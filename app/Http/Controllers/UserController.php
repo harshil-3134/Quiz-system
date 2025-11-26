@@ -29,6 +29,12 @@ class UserController extends Controller
         return view('welcome',['categories'=>$categories,'quizData'=>$quizData]);
     }
 
+    function categories(){
+      $categories=category::withCount('quizzes')->orderBy('quizzes_count','desc')->paginate(3);
+      return view('categories-list',['categories'=>$categories]);
+
+    }
+
     function userQuizList($id,$category){
        
            $quizData=Quiz::withCount('Mcq')->where('category_id',$id)->get();

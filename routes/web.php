@@ -9,15 +9,31 @@ Route::get('/',[UserController::class,'welcome']);
 Route::get('user-quiz-list/{id}/{category}',[UserController::class,'userQuizList']);
 Route::get('start-quiz/{id}/{name}',[UserController::class,'startQuiz']);
 
-Route::view('user-signup','user-signup');
+//Route::view('user-signup','user-signup');
 Route::view('user-login','user-login');
 Route::post('user-login',[UserController::class,'userLogin']);
 Route::get('user-login-quiz',[UserController::class,'userLoginQuiz']);
+Route::get('user-login',function(){
+   if(!session()->has('user')){
+    return  view('user-login');
+   }else{
+    return redirect('/'); 
+   } 
+});
+Route::get('user-signup',function(){
+   if(!session()->has('user')){
+     return view('user-signup');
+   }else{
+    return redirect('/'); 
+   } 
+});
 
 Route::post('user-signup',[UserController::class,'userSignup']);
 Route::get('user-signup-quiz',[UserController::class,'userSignupQuiz']);
 Route::get('user-logout',[UserController::class,'userLogout']);
 Route::get('search-quiz',[UserController::class,'searchQuiz']);
+
+Route::get('categories-list',[UserController::class,'categories']);
 
 Route::get('verify-user/{email}',[UserController::class,'verifyUser']);
 Route::view('user-forgot-password','user-forgot-password');

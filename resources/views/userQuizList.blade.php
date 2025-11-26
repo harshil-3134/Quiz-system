@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz List page</title>
+    <title>Category : {{str_replace('-',' ',$category) }}  </title>
         @vite('resources/css/app.css')
 </head>
 <body >
@@ -10,7 +10,7 @@
 
     <div class=" bg-gray-100 flex flex-col items-center min-h-screen pt-5">  
 
-    <h2 class=" text-2xl text-center text-gray-800 mb-6">Category Name : {{ $category }}    
+    <h2 class=" text-2xl text-center text-gray-800 mb-6">Category Name : {{str_replace('-',' ',$category) }}    
     </h2>  
   <div class=" w-200">
 
@@ -33,7 +33,7 @@
                     <li class=" w-110">{{$item->name}}</li>
                     <li class=" w-30">{{$item->mcq_count}}</li>
                       <li class=" w-30 flex">
-                        <a href="/start-quiz/{{$item->id}}/{{ $item->name }}" class=" text-green-500 font-bold">
+                        <a href="/start-quiz/{{$item->id}}/{{str_replace(' ','-',$item->name) }}" class=" text-green-500 font-bold">
                         Attemt Quiz    
                         </a>  
                     </li>

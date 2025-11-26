@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz List page</title>
+    <title>{{ str_replace('-',' ',$quizName) }}</title>
         @vite('resources/css/app.css')
 </head>
 <body >
@@ -14,7 +14,7 @@
     @endif
     <div class=" bg-gray-100 flex flex-col items-center min-h-screen pt-5">  
 
-    <h1 class=" text-4xl text-center text-gray-800 font-bold mb-6">{{ $quizName }}   
+    <h1 class=" text-4xl text-center text-gray-800 font-bold mb-6">{{ str_replace('-',' ',$quizName) }}   
     </h1> 
     <h3 class="text-lg text-center text-gray-800  mb-6"
     >This is quiz contains {{$quizCount}} Questions and no limit to attempt</h3> 
