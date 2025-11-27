@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz system Home page</title>
+    <title>Category page</title>
         @vite('resources/css/app.css')
 </head>
 <body >

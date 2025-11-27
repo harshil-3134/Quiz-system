@@ -9,7 +9,12 @@
     <x-user-navbar ></x-user-navbar>
 
     <div class=" bg-gray-100 flex flex-col items-center min-h-screen pt-5">  
-
+  
+         @if(session('message-error')) 
+    <div>
+        <p class=" text-red-500 font-bold">{{session('message-error')}}</p>
+    </div>
+    @endif
     <h2 class=" text-2xl text-center text-gray-800 mb-6">Category Name : {{str_replace('-',' ',$category) }}    
     </h2>  
   <div class=" w-200">
@@ -44,6 +49,6 @@
         
     </ul>
   </div>
-   </div>
+   </div>w
 </body>
 </html>

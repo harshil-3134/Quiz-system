@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Categories page</title>
+    <title>Quiz result page</title>
         @vite('resources/css/app.css')
 </head>
 <body >
@@ -11,7 +11,7 @@
 <h1 class=" text-4xl text-green-900 p-5 font-bold">Quiz Result</h1>
  <div class=" w-200">
     @if($correctAnswers*100/count($resultData)>70)
-    <a href="/certificate" class=" text-green-500 font-bold block">View and dowload certificate</a>
+    <a href="/certificate" class=" text-green-500 text-center font-bold block">View and dowload certificate</a>
     @endif
     <h1 class=" text-2xl text-green-900  text-center my-5">
         {{ $correctAnswers }} out of {{ count($resultData) }} is correct.

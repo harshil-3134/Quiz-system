@@ -62,7 +62,11 @@
     <div class=" w-200">
             <h1 class=" text-2xl text-green-900  text-center my-10">Top Quiz</h1>
 
-
+ @if(session('message-error')) 
+    <div class=" text-center">
+        <p class=" text-red-500 font-bold">{{session('message-error')}}</p>
+    </div>
+    @endif
     <ul class=" border border-gray-200 mb-20">
         <li class=" p-2 font-bold">
                 

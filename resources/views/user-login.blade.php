@@ -15,7 +15,7 @@
     @endif
         @if(session('message-error')) 
     <div>
-        <p class=" text-red-500 font-bold">{{session('message-error')}}</p>
+        <p class=" text-red-500 font-bold text-center">{{session('message-error')}}</p>
     </div>
     @endif
     <h2 class=" text-2xl text-center text-gray-800 font-bold mb-6">User Login</h2> 

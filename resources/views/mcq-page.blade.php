@@ -45,6 +45,7 @@
 
        <label for="option_4" class="flex border p-3  rounded-2xl shadow-2xl cursor-pointer hover:bg-blue-50">
           <input id="option_4" type="radio" class=" font-radio text-blue-500" value="d" name="option">
+          
           <span class=" text-green-900 pl-2">{{ $mcqData->d }}</span>
        </label>
 
